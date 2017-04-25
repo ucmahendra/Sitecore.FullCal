@@ -1,0 +1,52 @@
+﻿@using Sitecore.Data.Items
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+@using Sitecore.EventCalendar.Indexing
+@using Sitecore.EventCalendar.Managers
+
+@model RenderingModel
+
+@{
+    EventIndex Event;
+    string wildcard = Sitecore.Web.WebUtil.GetUrlName(0);
+    Event = EventSearch.FindByItemName(wildcard);
+}
+
+@if (Event != null)
+{
+    <div>
+        <div class="event-title">
+            @Event.EventTitle
+        </div>
+        <div class="event-summary">
+            @Event.EventSummary
+        </div>
+        <div class="event-shortsummary">
+            @Event.EventShortSummary
+        </div>
+        <div class="event-display-date">
+            @Event.DisplayDate
+        </div>
+        <div class="event-location">
+            @Event.Location
+        </div>
+        <div class="start-date">
+            @Event.EventStartDate
+        </div>
+        <div class="end-date">
+            @Event.EventEndDate
+        </div>
+        @*<div class="category-type">
+            @Html.Raw(string.Join(", ", Event.EventCategoryType.Select(i => Sitecore.Context.Database.GetItem(i).Name)))
+        </div>*@
+        <div class="event-image">
+            @Event.EventImage
+        </div>
+    </div>
+}
+else
+{
+    <div class="no-event-found">
+        There was not event found to show info.
+    </div>
+}

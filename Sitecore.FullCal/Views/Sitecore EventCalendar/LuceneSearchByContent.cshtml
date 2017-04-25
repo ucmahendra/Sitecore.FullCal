@@ -1,0 +1,44 @@
+﻿@using Sitecore.Data.Items
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+@using Sitecore.FullCalendar.Events.Indexing
+
+@model RenderingModel
+
+@{
+    EventIndex Event;
+    string query = Request.QueryString["query"];
+    Event = Sitecore.FullCalendar.Events.SearchManagers.EventManager.FindByContent(query);
+}
+
+@if (Event != null)
+{
+    <div>
+        <div class="event-title">
+            @Event.Title
+        </div>
+        <div class="event-summary">
+            @Event.Summary
+        </div>
+        <div class="event-shortsummary">
+            @Event.ShortSummary
+        </div>
+        <div class="event-display-date">
+            @Event.DisplayDate
+        </div>
+        <div class="start-date">
+            @Event.EventStartDate
+        </div>
+        <div class="end-date">
+            @Event.EventEndDate
+        </div>
+    </div>
+}
+else
+{
+    <div class="no-event-found">
+        There was not event found to show info.
+    </div>
+}
+
+@functi

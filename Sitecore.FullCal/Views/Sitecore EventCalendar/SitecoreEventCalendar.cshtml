@@ -1,0 +1,175 @@
+﻿@using Sitecore.Data.Fields
+@using Sitecore.Data.Items
+@using Sitecore.EventCalendar
+@using Sitecore.EventCalendar.Extensions
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+
+
+@model RenderingModel
+
+@{
+    // Get event category items
+    var items = Sitecore.Context.Database.GetItem(EventConfigSettings.EventCategoryFolderID).Axes.GetDescendants().Where(i => i.TemplateID.ToString() == EventConfigSettings.EventCategoryItemTemplateID);
+
+    string cssClass = "";
+    bool showSearchBox = false;
+    // Get event category items
+    var settingItem = Sitecore.Context.Database.GetItem(EventConfigSettings.EventCalendarSettingItem);
+    if (settingItem != null)
+    {
+        cssClass = settingItem.Fields["Css Class"].Value;
+        CheckboxField showSearchBoxField = settingItem.Fields["Show Search Box"];
+        if (showSearchBoxField != null)
+        {
+            showSearchBox = showSearchBoxField.Checked;
+        }
+    }
+
+    // Get left, center and right control
+    var leftDatasourceControl = "";
+    var centerDatasourceControl = "";
+    var rightDatasourceControl = "";
+    if (RenderingContext.Current.Rendering != null)
+    {
+        // Get left control
+        if (RenderingContext.Current.Rendering.Parameters["Calendar Header Left Control"] != null)
+        {
+            var leftControlParameters = RenderingContext.Current.Rendering.Parameters["Calendar Header Left Control"].Split('|').ToList();
+            leftDatasourceControl = CalendarItemExtensions.CalendarControls(leftControlParameters);
+        }
+        // Get center control
+        if (RenderingContext.Current.Rendering.Parameters["Calendar Header Center Control"] != null)
+        {
+            var centerControlParameters = RenderingContext.Current.Rendering.Parameters["Calendar Header Center Control"].Split('|').ToList();
+            centerDatasourceControl = CalendarItemExtensions.CalendarControls(centerControlParameters);
+        }
+        // Get right control
+        if (RenderingContext.Current.Rendering.Parameters["Calendar Header Right Control"] != null)
+        {
+            var rightControlParameters = RenderingContext.Current.Rendering.Parameters["Calendar Header Right Control"].Split('|').ToList();
+            rightDatasourceControl = CalendarItemExtensions.CalendarControls(rightControlParameters);
+        }
+    }
+}
+
+<link href="~/sitecore modules/Sitecore EventCalendar/css/fullcalendar.print.css" rel="stylesheet" media='print' />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/fullcalendar.css" rel="stylesheet" />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/jquery.qtip.min.css" rel="stylesheet" />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/bootstrap/bootstrap-theme.css" rel="stylesheet" />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/titatoggle-dist.css" rel="stylesheet" />
+<link href="~/sitecore modules/Sitecore EventCalendar/css/main.css" rel="stylesheet" />
+<script src="~/sitecore modules/Sitecore EventCalendar/lib/jquery.min.js"></script>
+<script src="~/sitecore modules/Sitecore EventCalendar/lib/moment.min.js"></script>
+<script src="~/sitecore modules/Sitecore EventCalendar/lib/bootstrap.min.js"></script>
+<script src="~/sitecore modules/Sitecore EventCalendar/lib/fullcalendar.js"></script>
+<script src="~/sitecore modules/Sitecore EventCalendar/lib/jquery.qtip.min.js"></script>
+<script src="~/sitecore modules/Sitecore EventCalendar/js/SitecoreEventCalendar.js"></script>
+
+<div class="event-calender-container @cssClass">
+    <input type="hidden" value="@(Sitecore.Context.Item.ID.ToString())" id="hiddenContextItem" />
+    <div class="event-calender-container-inner">
+        <div class="event-calender-inner">
+            @if (showSearchBox)
+            {
+                <div class="search-menu-top col-sm-3">
+                    <input type="text" placeholder="Search Here.." class="search-box" value="@(Request.QueryString["q"] != null ? Request.QueryString["q"].ToString() : "" )" id="txtSearchValue" name="txtSearchValue">
+                    <span class="search-icon"></span>
+                    <div class="clearfix"></div>
+                </div>
+            }
+
+            @{
+                var category = "";
+                if (Request.QueryString["categories"] != null)
+                {
+                    category = Request.QueryString["categories"].ToString();
+                }
+                <div class="checkbox-group">
+                    <span class="filter-text text-uppercase">Filter By Label</span>
+                    <ul class="list-inline clearfix">
+                        @foreach (Item i in items)
+                        {
+                            var colorClass = "";
+                            var colorItem = ((LookupField)(i.Fields["Event Color"])).TargetItem;
+                            var eventTitleColor = i.Fields["Event Title Color"].Value;
+                            var bgColor = i.Fields["Event BG Color"].Value;
+                            if (colorItem != null)
+                            {
+                                colorClass = colorItem.Fields["Meta Value"].Value;
+                            }
+                            var checkedCategory = "";
+                            if (!category.IsNullOrEmpty())
+                            {
+                                checkedCategory = category.Contains(i.Name) ? "checked" : "";
+                            }
+
+                            <li class="checkbox-slider--b-flat checkbox-color @colorClass"><label class="checkbox"><input class="category-checkbox" type="checkbox" @(checkedCategory) value="@i.ID.ToString()" name="categories" itemname="@i.Name.ToString()" /><span class="category-checkboxText">@i["Category Title"]</span></label></li>
+
+                            <style type="text/css">
+                                .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event.@colorClass, .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event.@colorClass .fc-title {
+                                    color: @eventTitleColor;
+                                }
+
+                                .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event.@colorClass .fc-title:hover {
+                                    color: @eventTitleColor;
+                                }
+
+                                .event-calender-container-inner .checkbox-group > ul li.@colorClass label .category-checkboxText::before {
+                                    background-color: @eventTitleColor;
+                                }
+
+                                .event-calender-container-inner .event-list-view-container .event-list-item .event-summary-container .event-category-type.@colorClass {
+                                    background-color: @bgColor;
+                                    color: @eventTitleColor;
+                                }
+                            </style>
+                        }
+                    </ul>
+                </div>
+            }
+
+
+            <div id='calendar@(Sitecore.Mvc.Presentation.RenderingContext.Current.Rendering.UniqueId)' class="event-calender"></div>
+
+            <div class="event-list-view-container clearfix">
+            </div>
+        </div>
+    </div>
+    <div class="content-separator"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        searchBoxEvent(false);
+        $('.category-checkbox').change(function (e) {
+            searchBoxEvent(true);
+        });
+
+        $('.search-menu-top .search-icon').click(function () {
+            searchBoxEvent(true);
+        });
+
+        $('.search-menu-top .search-box').keypress(function (e) {
+            if (e.which === 13) {
+                searchBoxEvent(true);
+            }
+        });
+    });
+
+    function searchBoxEvent(destroy) {
+        var searchQuery = $('.search-menu-top .search-box').val();
+        var calControlId = '#calendar@(Sitecore.Mvc.Presentation.RenderingContext.Current.Rendering.UniqueId)';
+        var leftControl = "@leftDatasourceControl";
+        var centerControl = "@centerDatasourceControl";
+        var rightControl = "@rightDatasourceControl";
+        var categories = $('.category-checkbox:checked').map(function () { return this.value; }).get().join(',');
+        var contextItemId = $('#hiddenContextItem').val();
+        if (destroy) {
+            $(calControlId).fullCalendar('destroy');
+        }
+        ScfullCalendar(calControlId, leftControl, centerControl, rightControl, categories, searchQuery, contextItemId);
+    }
+
+</script>

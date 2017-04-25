@@ -1,0 +1,139 @@
+﻿@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+
+@*
+    The rendering section for scripts need to be called from the layout page using the following:
+    @RenderSection("addStyleAndScriptControls", required: false)
+*@
+
+@{
+    string calendarString = string.Empty;
+	string simpleCalendarString = string.Empty; 
+    string hideColors = string.Empty;
+    string hideLegend = string.Empty;
+    var rc = RenderingContext.CurrentOrNull;
+    if (rc != null)
+    {
+        var parms = rc.Rendering.Parameters;
+		calendarString = parms["Calendars"]!=null ? parms["Calendars"] : "";
+        simpleCalendarString = parms["Calendars"]!=null ? parms["Calendars"].Replace("{", "").Replace("}", "") : "";
+        hideColors = parms["Hide Event Colors"];
+        hideLegend = parms["Hide Legend"];
+    }
+	
+    buildFilter(calendarString);
+    if (string.IsNullOrEmpty(hideLegend)) //If Hide Legend parameter is not checked
+    {
+        buildColorLegend(calendarString);
+    }
+}
+
+@helper buildFilter(string calendarString)
+{
+    Item[] items = Sitecore.Context.Database.SelectItems(Sitecore.Configuration.Settings.GetSetting("FastQueryForTags")); //Sitecore setting from App_Config/Include/Symsoft.Calendar.config
+
+    <ul class="dropdown-menu dropdown-menu-form" role="menu">
+        <li><input class="symCal-checkbox-checkAll" type="checkbox" checked="checked" /><span class="symCal-checkbox-checkAllText">Uncheck All</span></li>
+        @foreach (Item i in items)
+        {
+            <li class="symCal-filterGroup">@i.Name</li>
+            foreach (Item c in i.Children)
+            {
+                <li><label class="checkbox"><input class="symCal-checkbox" type="checkbox" checked="checked" value="@c["Text"]" /><span class="symCal-checkboxText">@c["Text"]</span></label></li>
+            }
+        }
+
+        @*Check if there is any Uncategorized event item*@
+        @if (hasUncategorized(calendarString))
+        {
+            <li class="symCal-filterGroup">Uncategorized</li>
+            <li><label class="checkbox"><input class="symCal-checkbox" type="checkbox" checked="checked" value="Uncategorized" /><span class="symCal-checkboxText">Uncategorized</span></label></li>
+        }
+    </ul>
+}
+
+@functions
+{
+    /// <summary>
+    /// Check if there is uncategorized items
+    /// </summary>
+    /// <returns>bool</returns>
+    private bool hasUncategorized(string calendarString)
+    {
+        var calendarItem = Sitecore.Context.Database.GetItem("/sitecore/Content/SymCal");
+
+        //Create a query expression to get the sub item with template type 'Event'
+        string queryExpression = ".//*[@@templatename='" + Sitecore.Configuration.Settings.GetSetting("EventDataTemplateName") + "']";
+
+        var items = calendarItem != null ? calendarItem.Axes.SelectItems(queryExpression).Where(i => Sitecore.DateUtil.ParseDateTime(i["Event Start"], DateTime.Now) >= DateTime.Now.Date && calendarString.ToLower().Contains(i.ParentID.ToGuid().ToString().ToLower())) : null;
+
+        return items.Where(i => getListCategories(i).Count() == 0).Count() > 0 ? true : false;
+    }
+
+    private List<string> getListCategories(Item item)
+    {
+        List<string> listCategories = new List<string>();
+        MultilistField Tags = item.Fields["Tags"];
+        Item[] TagList = Tags.GetItems();
+
+        foreach (Item i in TagList)
+        {
+            listCategories.Add(i["Text"]);
+        }
+
+        return listCategories;
+    }
+
+}
+
+@helper buildColorLegend(string calendarString)
+{
+    if (!string.IsNullOrEmpty(calendarString))
+    {
+        var items = Sitecore.Context.Database.SelectItems("fast:/sitecore/content//*[@@templatename='" + Sitecore.Configuration.Settings.GetSetting("CalendarTemplateName") + "']").Where(i => calendarString.ToLower().Contains(i.ID.ToString().ToLower())).OrderBy(x => x.Name);
+
+        <div>
+            <ul class="legend">
+                @foreach (Item i in items)
+                {
+                    <li>
+                        <span style="background-color:@i["color"]"></span> @i.Name
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+}
+
+<link href="@Url.Content("~/css/SymCal/symcal-core.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/SymCal/Theme/default.css")" rel="stylesheet" type="text/css" />
+<script type=text/javascript src='/javascript/SymCal/fullcalendar.min.js'></script>
+<script type=text/javascript src='/javascript/SymCal/dropdown.js'></script>
+<script type=text/javascript src='/javascript/SymCal/FullCalendarWidget.js'></script>
+
+<div id="divStyle" class="symCal-container">
+
+    <div class="symcal-dropdown symCalCatDropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Categories
+            <b class="caret"></b>
+        </a>
+        <!-- placerholder plCalendarFilter contains the filter checkboxes for the calendar -->
+        @buildFilter(calendarString)
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <!-- pnlCalendar contains the Full Calendar -->
+    <div id="pnlCalendar_@RenderingContext.Current.Rendering.UniqueId" class="fullCalendar"></div>
+
+    <!-- pnlCalendarLegend contains the color legend -->
+    @buildColorLegend(calendarString)
+
+</div>
+<script type=text/javascript>$(document).ready(function ($) {$('body').FullCalendarWidget('#pnlCalendar_' + '@RenderingContext.Current.Rendering.UniqueId.ToString()','http://' + '@Request.Url.Host' + ':' + '@Request.Url.Port' + '/Ajax/Ajax.ashx?id=' + '@Sitecore.Context.Item.ID.ToGuid().ToString()' + '&calendars=' + '@simpleCalendarString', 'prev,next', 'title', 'month,agendaWeek,agendaDay', false, ''); }(jQuery))</script>
+
+<div id='loading' style='display:none'>loading...</div>
+

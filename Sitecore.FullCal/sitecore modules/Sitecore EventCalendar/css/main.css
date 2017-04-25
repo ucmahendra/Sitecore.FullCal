@@ -1,0 +1,671 @@
+﻿@charset "UTF-8";
+
+.GothamBook, .event-calender-container-inner .search-menu-top, .event-calender-container-inner .search-menu-top .search-box {
+    font-family: "Arial", "sans-serif";
+    font-weight: normal;
+}
+
+.GothamMedium, .event-calender-container-inner .event-calender .fc-view-container .fc-past, .event-calender-container-inner .event-calender .fc-view-container .fc-today, .event-calender-container-inner .event-calender .fc-view-container .fc-future {
+    font-family: "Arial", "sans-serif";
+    font-weight: normal;
+}
+
+
+.GothamBold, .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content .fc-title, .event-calender-container-inner .event-calender .fc-view-container .fc-title, .event-calender-container-inner .checkbox-group .filter-text {
+    font-family: "Arial", "sans-serif";
+    font-weight: bold;
+}
+
+.event-calender-container {
+    position: relative;
+}
+
+    .event-calender-container:after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+
+    .event-calender-container .vertical-text {
+        top: 425px;
+    }
+
+
+
+.event-calender-container-inner:after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.event-calender-container-inner .event-calender-inner {
+    position: relative;
+}
+
+.event-calender-container-inner .event-calender {
+    padding-bottom: 60px;
+}
+
+
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event {
+        margin: 0;
+        padding: 5px 10px;
+        border: none;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content {
+            white-space: normal;
+        }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content .fc-title {
+                font-size: 12px;
+                line-height: 16px;
+            }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-event {
+        -ms-border-radius: unset;
+        border-radius: unset;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .orange {
+        background-color: #fcd8cc;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .orange .fc-content .fc-title {
+            color: #f36433;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .violet {
+        background-color: #dad1e5;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .violet .fc-content .fc-title {
+            color: #6d4996;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .lightgreen {
+        background-color: #d2e7e7;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .lightgreen .fc-content .fc-title {
+            color: #4ca19f;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .darkgreen .fc-content .fc-title {
+        color: #16730f;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .darkred .fc-content .fc-title {
+        color: #7a1313;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-past, .event-calender-container-inner .event-calender .fc-view-container .fc-today, .event-calender-container-inner .event-calender .fc-view-container .fc-future {
+        background-color: #f6f6f6;
+        text-align: left;
+        border-color: #dfdfdf;
+        color: #484747;
+        font-size: 20px;
+        line-height: 24px;
+        padding-left: 10px;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .fc-past.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-today.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-future.fc-other-month {
+            background-color: #e4e4e4;
+            color: #ccc;
+            opacity: 1;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-day-number {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-event-container {
+        padding: 0;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-title {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-body .fc-row {
+        min-height: 150px;
+    }
+
+    .event-calender-container-inner .event-calender .fc-day-grid-container {
+        height: auto !important;
+        overflow-y: hidden !important;
+    }
+
+.event-calender-container-inner .checkbox-group {
+    width: 100%;
+    padding: 0;
+    z-index: 1;
+}
+
+
+    .event-calender-container-inner .checkbox-group .filter-text {
+        color: #fff;
+        font-size: 12px;
+        line-height: 12px;
+        padding: 15px 30px 15px 15px;
+        display: block;
+        background-color: #0064c2;
+        display: inline-block;
+        -moz-transition: color 0.5s linear 0s, background-color 0.5s ease-in-out 0s;
+        -o-transition: color 0.5s linear 0s, background-color 0.5s ease-in-out 0s;
+        -webkit-transition: color 0.5s linear 0s, background-color 0.5s ease-in-out 0s;
+        transition: color 0.5s linear 0s, background-color 0.5s ease-in-out 0s;
+        display: block;
+    }
+
+
+    .event-calender-container-inner .checkbox-group > ul {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #002344;
+    }
+
+        .event-calender-container-inner .checkbox-group > ul li {
+            width: 50%;
+            display: table-cell;
+            float: left;
+            padding: 10px;
+            border-right: 1px solid #4a4a4a;
+        }
+
+            .event-calender-container-inner .checkbox-group > ul li.checkbox-slider--b-flat label {
+                margin: 0;
+            }
+
+                .event-calender-container-inner .checkbox-group > ul li.checkbox-slider--b-flat label .category-checkboxText {
+                    color: #fff;
+                    margin-left: 4px;
+                }
+
+            .event-calender-container-inner .checkbox-group > ul li.checkbox-slider--b-flat input + span:before {
+                background-color: #a0a0a0;
+            }
+
+.event-calender-container-inner .fc-toolbar {
+    padding: 20px 0 15px;
+    background-color: #333333;
+    margin-bottom: 0;
+}
+
+    .event-calender-container-inner .fc-toolbar h2 {
+        color: #fff;
+        margin: 0;
+        font-size: 26px;
+        line-height: 34px;
+    }
+
+    .event-calender-container-inner .fc-toolbar .fc-center {
+        position: relative;
+        padding: 0 35px;
+    }
+
+    
+
+        
+
+       
+
+
+
+
+
+
+
+
+
+.event-calender-container-inner .search-menu-top {
+    background: #e4e4e4 none repeat scroll 0 0;
+    float: none;
+    padding: 3px 15px 0;
+}
+
+    .event-calender-container-inner .search-menu-top .search-box {
+        color: #333333;
+            padding: 5px 0;
+            border: none;
+            max-width: 280px;
+            background: none;
+            font-size: 16px;
+            line-height: 20px;
+            float: left;
+    }
+    .event-calender-container-inner .search-menu-top .search-box:focus {
+                border: none;
+                outline: none;
+            }
+    .event-calender-container-inner .search-menu-top ::-webkit-input-placeholder {
+        /* Chrome/Opera/Safari */
+        color: #4a4a4a;
+        opacity: 1;
+    }
+
+    .event-calender-container-inner .search-menu-top ::-moz-placeholder {
+        /* Firefox 19+ */
+        color: #4a4a4a;
+        opacity: 1;
+    }
+
+    .event-calender-container-inner .search-menu-top :-ms-input-placeholder {
+        /* IE 10+ */
+        color: #4a4a4a;
+        opacity: 1;
+    }
+
+    .event-calender-container-inner .search-menu-top :-moz-placeholder {
+        /* Firefox 18- */
+        color: #4a4a4a;
+        opacity: 1;
+    }
+
+    .event-calender-container-inner .search-menu-top .search-icon {
+       color: #797979;
+            float: left;
+            height: 20px;
+            width: 20px;
+            background: url(../img/search-icon.png);
+            -ms-background-size: 20px;
+            background-size: 20px;
+            margin-top: 4px;
+    }
+
+
+
+
+@media (min-width: 768px) {
+
+    .event-calender-container {
+        position: relative;
+    }
+
+        .event-calender-container:after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+        .event-calender-container .vertical-text {
+            top: 450px;
+        }
+
+
+
+    .event-calender-container-inner:after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+
+    .event-calender-container-inner .event-calender-inner {
+        position: relative;
+    }
+
+    .event-calender-container-inner .event-calender {
+        padding-bottom: 0;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container {
+            display: block;
+        }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event {
+                margin: 0;
+                padding: 5px 10px;
+                border: none;
+            }
+
+                .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content {
+                    white-space: normal;
+                }
+
+                    .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content .fc-title {
+                        font-size: 12px;
+                        line-height: 16px;
+                    }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-event {
+                -ms-border-radius: unset;
+                border-radius: unset;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .orange {
+                background-color: #fcd8cc;
+            }
+
+                .event-calender-container-inner .event-calender .fc-view-container .orange .fc-content .fc-title {
+                    color: #f36433;
+                }
+
+            .event-calender-container-inner .event-calender .fc-view-container .violet {
+                background-color: #dad1e5;
+            }
+
+                .event-calender-container-inner .event-calender .fc-view-container .violet .fc-content .fc-title {
+                    color: #6d4996;
+                }
+
+            .event-calender-container-inner .event-calender .fc-view-container .lightgreen {
+                background-color: #d2e7e7;
+            }
+
+                .event-calender-container-inner .event-calender .fc-view-container .lightgreen .fc-content .fc-title {
+                    color: #4ca19f;
+                }
+
+            .event-calender-container-inner .event-calender .fc-view-container .darkgreen .fc-content .fc-title {
+                color: #16730f;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .darkred .fc-content .fc-title {
+                color: #7a1313;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-past, .event-calender-container-inner .event-calender .fc-view-container .fc-today, .event-calender-container-inner .event-calender .fc-view-container .fc-future {
+                background-color: #f6f6f6;
+                text-align: left;
+                border-color: #dfdfdf;
+                color: #484747;
+                font-size: 20px;
+                line-height: 24px;
+                padding-left: 10px;
+            }
+
+                .event-calender-container-inner .event-calender .fc-view-container .fc-past.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-today.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-future.fc-other-month {
+                    background-color: #e4e4e4;
+                    color: #ccc;
+                }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-day-number {
+                font-size: 20px;
+                line-height: 24px;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-event-container {
+                padding: 0;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-title {
+                font-size: 12px;
+                line-height: 16px;
+            }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-body .fc-row {
+                min-height: 150px;
+            }
+
+        .event-calender-container-inner .event-calender .fc-day-grid-container {
+            height: auto !important;
+            overflow-y: hidden !important;
+        }
+
+    .event-calender-container-inner .checkbox-group {
+        width: 100%;
+        padding: 0;
+        display: table;
+        z-index: 0;
+    }
+
+        .event-calender-container-inner .checkbox-group .filter-text {
+            color: #fff;
+            font-size: 12px;
+            line-height: 16px;
+            padding: 12px 0 10px 20px;
+            display: block;
+        }
+
+
+        .event-calender-container-inner .checkbox-group > ul {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            display: table;
+            background-color: #797979;
+        }
+
+            .event-calender-container-inner .checkbox-group > ul li {
+                width: 20%;
+                display: table-cell;
+                padding: 10px;
+                border-right: 1px solid #4a4a4a;
+            }
+
+                .event-calender-container-inner .checkbox-group > ul li.checkbox-slider--b-flat label {
+                    margin: 0;
+                }
+
+                    .event-calender-container-inner .checkbox-group > ul li.checkbox-slider--b-flat label .category-checkboxText {
+                        color: #fff;
+                        margin-left: 4px;
+                    }
+
+    .event-calender-container-inner .fc-toolbar {
+        padding: 45px 0 50px;
+        background-color: #333333;
+        margin-bottom: 0;
+    }
+
+        .event-calender-container-inner .fc-toolbar h2 {
+            color: #fff;
+            margin: 0;
+            font-size: 30px;
+            line-height: 34px;
+        }
+
+        .event-calender-container-inner .fc-toolbar .fc-center {
+            position: relative;
+            padding: 0 50px;
+            margin-left: 90px;
+        }
+
+       
+
+            
+
+
+
+
+
+
+
+    .event-calender-container-inner .search-menu-top {
+        width: 100%;
+    }
+
+        .event-calender-container-inner .search-menu-top .search-box {
+            color: #333333;
+            padding: 5px 0;
+            border: none;
+            max-width: 280px;
+            background: none;
+            font-size: 16px;
+            line-height: 20px;
+            float: left;
+        }
+        .event-calender-container-inner .search-menu-top .search-box:focus {
+                border: none;
+                outline: none;
+            }
+        .event-calender-container-inner .search-menu-top ::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: #333333;
+            -ms-opacity: 1;
+            opacity: 1;
+        }
+
+        .event-calender-container-inner .search-menu-top ::-moz-placeholder {
+            /* Firefox 19+ */
+            color: #333333;
+            -ms-opacity: 1;
+            opacity: 1;
+        }
+
+        .event-calender-container-inner .search-menu-top :-ms-input-placeholder {
+            /* IE 10+ */
+            color: #333333;
+            -ms-opacity: 1;
+            opacity: 1;
+        }
+
+        .event-calender-container-inner .search-menu-top :-moz-placeholder {
+            /* Firefox 18- */
+            color: #333333;
+            -ms-opacity: 1;
+            opacity: 1;
+        }
+
+        .event-calender-container-inner .search-menu-top .search-icon {
+            color: #797979;
+        }
+}
+
+@media(min-width:1024px) {
+
+    .event-calender-container {
+        position: relative;
+    }
+
+        .event-calender-container:after {
+            display: block;
+            content: '';
+            clear: both;
+        }
+
+    .event-calender-container-inner:after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event {
+        margin: 0;
+        padding: 10px 15px;
+        border: none;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content {
+            white-space: normal;
+        }
+
+            .event-calender-container-inner .event-calender .fc-view-container .fc-day-grid-event .fc-content .fc-title {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-event {
+        -ms-border-radius: unset;
+        border-radius: unset;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .orange {
+        background-color: #fcd8cc;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .orange .fc-content .fc-title {
+            color: #f36433;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .violet {
+        background-color: #dad1e5;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .violet .fc-content .fc-title {
+            color: #6d4996;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .lightgreen {
+        background-color: #d2e7e7;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .lightgreen .fc-content .fc-title {
+            color: #4ca19f;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-past, .event-calender-container-inner .event-calender .fc-view-container .fc-today, .event-calender-container-inner .event-calender .fc-view-container .fc-future {
+        background-color: #f6f6f6;
+        text-align: left;
+        border-color: #dfdfdf;
+        color: #484747;
+        font-size: 30px;
+        line-height: 34px;
+        padding-left: 10px;
+    }
+
+        .event-calender-container-inner .event-calender .fc-view-container .fc-past.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-today.fc-other-month, .event-calender-container-inner .event-calender .fc-view-container .fc-future.fc-other-month {
+            background-color: #e4e4e4;
+            color: #ccc;
+        }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-day-number {
+        font-size: 30px;
+        line-height: 34px;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-event-container {
+        padding: 0;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-title {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .event-calender-container-inner .event-calender .fc-view-container .fc-body .fc-row {
+        min-height: 200px;
+    }
+
+    .event-calender-container-inner .checkbox-group {
+        top: 125px;
+    }
+
+    .event-calender-container-inner .fc-toolbar {
+        padding: 45px 0 60px;
+        background-color: #333333;
+        margin-bottom: 0;
+    }
+
+        .event-calender-container-inner .fc-toolbar h2 {
+            font-size: 42px;
+            line-height: 46px;
+        }
+
+       
+
+    .event-calender-container-inner .search-menu-top {
+        width: 100%;
+    }
+
+        .event-calender-container-inner .search-menu-top .search-box {
+            color: #333333;
+            padding: 5px 0;
+            border: none;
+            max-width: 280px;
+            background: none;
+            font-size: 16px;
+            line-height: 20px;
+            float: left;
+        }
+
+            .event-calender-container-inner .search-menu-top .search-box:focus {
+                border: none;
+                outline: none;
+            }
+
+        .event-calender-container-inner .search-menu-top .search-icon {
+            color: #797979;
+            float: left;
+            height: 20px;
+            width: 20px;
+            background: url(../img/search-icon.png);
+            -ms-background-size: 20px;
+            background-size: 20px;
+            margin-top: 4px;
+        }
+}

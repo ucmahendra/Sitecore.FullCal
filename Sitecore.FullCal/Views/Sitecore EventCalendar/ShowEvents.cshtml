@@ -1,0 +1,32 @@
+﻿@using Sitecore.Data.Items
+@using Sitecore.Data.Fields;
+@using Sitecore.Data.Items;
+@using Sitecore.EventCalendar.Managers
+@using Sitecore.Links
+
+@model RenderingModel
+
+@{
+    List<Item> events = EventSearch.GetEvents();
+}
+
+@if (events != null && events.Any())
+{
+    foreach (var Event in events)
+    {
+        <div>
+            <div class="event-url">
+                @LinkManager.GetItemUrl(Event)
+                <a href="@LinkManager.GetItemUrl(Event)">@Event.Name</a>
+            </div>
+        </div>
+        <br />
+        <br />
+    }
+}
+else
+{
+    <div class="no-event-found">
+        There was not events found to show info.
+    </div>
+}
